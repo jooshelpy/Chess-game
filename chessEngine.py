@@ -14,7 +14,7 @@ class GameState():
             ["bR", "bN", "bB", "bQ", "bK", "bB", "bN", "bR"],
             ["bp", "bp", "bp", "bp", "bp", "bp", "bp", "bp"],
             ["--", "--", "--", "--", "--", "--", "--", "--"],
-            ["--", "--", "--", "bR", "--", "--", "--", "--"],
+            ["--", "--", "--", "--", "--", "--", "--", "--"],
             ["--", "--", "--", "--", "--", "--", "--", "--"],
             ["--", "--", "--", "--", "--", "--", "--", "--"],
             ["wp", "wp", "wp", "wp", "wp", "wp", "wp", "wp"],
@@ -83,7 +83,6 @@ class GameState():
                 if self.board[r+1][c+1][0] == "w":
                     moves.append(Move((r, c), (r+1, c+1), self.board))
 
-
     def getRookMoves(self, r, c, moves:list):
         """get all the Rook moves for the pawn located at row, col and add these moves to the list"""
         if self.whiteToMove:
@@ -112,7 +111,7 @@ class GameState():
                 moves.append(Move((r, c), (r+i+1, c), self.board))
 
         for i in range(r): # top
-            if self.board[r-i-1][c][0] != same:
+            if self.board[r-i-1][c][0] == same:
                 break
             if self.board[r-i-1][c][0] == notSame:
                 moves.append(Move((r, c), (r-i-1, c), self.board))
@@ -121,7 +120,7 @@ class GameState():
                 moves.append(Move((r, c), (r-i-1, c), self.board))
 
         for i in range(c): # left
-            if self.board[r][c-i-1][0] != same:
+            if self.board[r][c-i-1][0] == same:
                 break
             if self.board[r][c-i-1][0] == notSame:
                 moves.append(Move((r, c), (r, c-i-1), self.board))
@@ -174,13 +173,15 @@ class GameState():
             else:
                 moves.append(Move((r, c), (r-i-1, c-i-1), self.board))
 
-    def getKnightMoves(self, r, c, moves):
+    def getKnightMoves(self, r, c, moves:list):
         """get all the Knight moves for the pawn located at row, col and add these moves to the list"""
+
         pass
 
     def getQueenMoves(self, r, c, moves):
         """get all the Queen moves for the pawn located at row, col and add these moves to the list"""
-        pass
+        self.getRookMoves(r, c, moves)
+        self.getBishopMoves(r, c, moves)
 
     def getKingMoves(self, r, c, moves):
         """get all the Knight moves for the pawn located at row, col and add these moves to the list"""
