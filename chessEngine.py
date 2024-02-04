@@ -129,9 +129,50 @@ class GameState():
             else:
                 moves.append(Move((r, c), (r, c-i-1), self.board))
 
-    def getBishopMoves(self, r, c, moves):
+    def getBishopMoves(self, r, c, moves:list):
         """get all the Bishop moves for the pawn located at row, col and add these moves to the list"""
-        pass
+        if self.whiteToMove:
+            same = "w"
+            notSame = "b"
+        else:
+            same = "b"
+            notSame = "w"
+
+        for i in range(min(7-c, r)): # top right moves
+            if self.board[r-i-1][c+i+1][0] == same:
+                break
+            if self.board[r-i-1][c+i+1][0] == notSame:
+                moves.append(Move((r, c), (r-i-1, c+i+1), self.board))
+                break
+            else:
+                moves.append(Move((r, c), (r-i-1, c+i+1), self.board))
+
+        for i in range(min(7-c, 7-r)): # bottom right moves
+            if self.board[r+i+1][c+i+1][0] == same:
+                break
+            if self.board[r+i+1][c+i+1][0] == notSame:
+                moves.append(Move((r, c), (r+i+1, c+i+1), self.board))
+                break
+            else:
+                moves.append(Move((r, c), (r+i+1, c+i+1), self.board))
+
+        for i in range(min(c, 7-r)): # bottom left moves
+            if self.board[r+i+1][c-i-1][0] == same:
+                break
+            if self.board[r+i+1][c-i-1][0] == notSame:
+                moves.append(Move((r, c), (r+i+1, c-i-1), self.board))
+                break
+            else:
+                moves.append(Move((r, c), (r+i+1, c-i-1), self.board))
+
+        for i in range(min(c, r)): # top left moves
+            if self.board[r-i-1][c-i-1][0] == same:
+                break
+            if self.board[r-i-1][c-i-1][0] == notSame:
+                moves.append(Move((r, c), (r-i-1, c-i-1), self.board))
+                break
+            else:
+                moves.append(Move((r, c), (r-i-1, c-i-1), self.board))
 
     def getKnightMoves(self, r, c, moves):
         """get all the Knight moves for the pawn located at row, col and add these moves to the list"""
