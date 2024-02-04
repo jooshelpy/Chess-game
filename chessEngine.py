@@ -113,8 +113,7 @@ class GameState():
 
         for i in range(r): # top
             if self.board[r-i-1][c][0] != same:
-                moves.append(Move((r, c), (r-i-1, c), self.board))
-
+                break
             if self.board[r-i-1][c][0] == notSame:
                 moves.append(Move((r, c), (r-i-1, c), self.board))
                 break
@@ -122,9 +121,8 @@ class GameState():
                 moves.append(Move((r, c), (r-i-1, c), self.board))
 
         for i in range(c): # left
-            if self.board[r][c-i-1][0] != notSame:
-                moves.append(Move((r, c), (r, c-i-1), self.board))
-
+            if self.board[r][c-i-1][0] != same:
+                break
             if self.board[r][c-i-1][0] == notSame:
                 moves.append(Move((r, c), (r, c-i-1), self.board))
                 break
